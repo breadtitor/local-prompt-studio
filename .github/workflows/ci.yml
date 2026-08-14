@@ -31,3 +31,14 @@ jobs:
         run: local-prompt-studio --skill examples/storyboard-skill --inspect-skill
       - name: Validate example output
         run: local-prompt-studio --skill examples/storyboard-skill --validate-only examples/expected-output.txt
+
+  quality:
+    name: quality
+    if: ${{ always() }}
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm the required matrix passed
+        env:
+          TEST_RESULT: ${{ needs.test.result }}
+        run: test "$TEST_RESULT" = "success"

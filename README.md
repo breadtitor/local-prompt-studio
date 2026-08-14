@@ -115,7 +115,8 @@ ruff check .
 
 The repository is in alpha. Compatibility reports for additional local servers and carefully
 licensed, independently authored Skills are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md)
-and [ROADMAP.md](ROADMAP.md).
+and [ROADMAP.md](ROADMAP.md). Maintainer checks and release evidence are documented in the
+[maintainer runbook](docs/MAINTAINER_RUNBOOK.md).
 
 ## License
 

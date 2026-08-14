@@ -76,5 +76,6 @@ Skill 会影响模型输出，应先用检查功能确认内容。加载器只�
 
 项目目前处于 alpha 阶段。欢迎提交不同本地服务的兼容性报告，以及拥有清晰授权、独立编写
 的模型 Skill。贡献方式见 [CONTRIBUTING.md](CONTRIBUTING.md)，路线图见
-[ROADMAP.md](ROADMAP.md)。项目原创代码与文档采用 [MIT License](LICENSE)；用户提供的
+[ROADMAP.md](ROADMAP.md)，维护与发布证据见
+[维护者手册](docs/MAINTAINER_RUNBOOK.md)。项目原创代码与文档采用 [MIT License](LICENSE)；用户提供的
 Skill 和模型服务仍受各自条款约束。
