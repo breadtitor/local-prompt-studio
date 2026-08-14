@@ -1,5 +1,7 @@
 # Local Prompt Studio
 
+![Local Prompt Studio: a Skill moves through a private local workflow into a validated prompt](assets/social-preview-github.jpg)
+
 [简体中文](README_zh-CN.md) · [Skill format](docs/SKILL_FORMAT.md) · [Security model](docs/SECURITY_MODEL.md)
 
 Local Prompt Studio is a private-by-default runner for prompt-writing Skills and
