@@ -13,4 +13,5 @@ stable public API is declared.
 - Text/image CLI, Tkinter GUI, deterministic validation, and private local history.
 - A bundled Codex authoring Skill for model-specific, provenance-aware packages.
 - A stable aggregate CI quality gate and maintainer release runbook.
+- A privacy-safe LM Studio compatibility report with a CI-validated synthetic output fixture.
 - English and Simplified Chinese documentation, tests, community files, and CI configuration.

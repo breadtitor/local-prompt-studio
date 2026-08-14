@@ -1,0 +1,11 @@
+creative_summary:
+A tiny red delivery robot navigates a rain-soaked night market to return a lost paper crane, maintaining a warm and grounded tone throughout its journey.
+
+visual_direction:
+The scene opens with a medium tracking shot following the robot as it weaves through wet pavement and low-hanging market awnings. Composition balances the small subject against the softly blurred background of glowing stalls and hanging lanterns. Lighting blends cool blue rain reflections with warm amber and soft pink neon from nearby vendors, creating an inviting, grounded atmosphere rather than a high-contrast cyberpunk look. The robot's matte red casing shows subtle water droplets and light scuffs, emphasizing its utilitarian design. As it approaches the drop-off point, the camera smoothly pushes forward without cutting, tilting slightly downward to frame the robot placing the damp paper crane on a dry ledge. The shot concludes in a quiet close-up of the crane resting beside the robot's sensor array, with gentle raindrops landing nearby. Continuity is maintained through consistent weather effects, steady background crowd movement, and unbroken lighting logic.
+
+audio_direction:
+Diegetic ambience includes steady rain patter on awnings and pavement, muffled distant market chatter, sizzling food stalls, and soft mechanical whirring from the robot's wheels and joints. A warm, minimal acoustic or synth pad underscores the scene at low volume, fading slightly as the close-up lands. No dialogue is present.
+
+negative_constraints:
+Maintain one continuous camera move with no cuts or whip pans. Keep the tone grounded and warm; avoid oversaturated neon-noir or high-contrast cyberpunk aesthetics. The robot must remain consistently tiny, red, and utilitarian in design. The paper crane stays simple and slightly damp, without magical glowing effects. Background crowd movement should be subtle and non-distracting. No dialogue, subtitles, or on-screen text. Camera motion must smoothly transition into the final close-up without speed jumps or directional shifts.

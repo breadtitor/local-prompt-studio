@@ -32,6 +32,8 @@ jobs:
         run: local-prompt-studio --skill examples/storyboard-skill --inspect-skill
       - name: Validate example output
         run: local-prompt-studio --skill examples/storyboard-skill --validate-only examples/expected-output.txt
+      - name: Validate recorded compatibility output
+        run: local-prompt-studio --skill examples/storyboard-skill --validate-only compatibility/fixtures/lm-studio-windows-2026-08-13-output.txt
 
   quality:
     name: quality

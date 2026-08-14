@@ -9,7 +9,7 @@ response to real issue reports.
 - [x] Skill inspection and optional output contracts
 - [x] OpenAI-compatible streaming client with same-turn continuation
 - [x] CLI, desktop UI, local history, and unit tests
-- [ ] Publish compatibility reports for at least two local servers
+- [ ] Publish compatibility reports for at least two local servers (LM Studio: complete)
 - [ ] Add signed release artifacts and a reproducible release checklist
 
 ## 0.2 — community Skills

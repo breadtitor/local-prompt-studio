@@ -49,6 +49,9 @@ package; Local Prompt Studio performs the independent structural checks.
 - Save atomic, private-by-default history records containing image basenames, not copied images.
 - Run through a dependency-free CLI or a Tkinter desktop UI.
 
+Real-server behavior is tracked through privacy-safe, CI-checked
+[compatibility reports](docs/COMPATIBILITY.md).
+
 ## Quick start
 
 Python 3.11 or newer is required.
