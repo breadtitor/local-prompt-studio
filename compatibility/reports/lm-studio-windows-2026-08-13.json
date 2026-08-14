@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "tested_at": "2026-08-13",
+  "project_commit": "dee32a78b614fdfc9e8a79b4110974772b72c781",
+  "environment": {
+    "operating_system": "Windows 11 Pro, build 26200",
+    "python": "3.14.3"
+  },
+  "server": {
+    "name": "LM Studio",
+    "cli_commit": "efce996",
+    "base_url": "http://127.0.0.1:1234/v1",
+    "network_scope": "loopback"
+  },
+  "model": {
+    "api_identifier": "lps-compat-test",
+    "family": "Qwen 3.6 MoE-class community GGUF",
+    "parameter_class": "35B-A3B",
+    "context_length": 8192,
+    "artifact_distributed_or_endorsed": false,
+    "artifact_name_omitted": "The local artifact name contains labels unrelated to transport compatibility."
+  },
+  "request": {
+    "skill": "examples/storyboard-skill",
+    "idea_fixture": "examples/idea.txt",
+    "images": 0,
+    "temperature": 0,
+    "max_tokens_per_turn": 1200,
+    "seed": 42,
+    "save_history": false
+  },
+  "result": {
+    "exit_code": 0,
+    "elapsed_seconds": 155.1,
+    "same_turn_continuation_triggered": true,
+    "output_characters": 2068,
+    "contract": "Generic storyboard prompt v1",
+    "contract_valid": true,
+    "discovered_sections": [
+      "creative_summary",
+      "visual_direction",
+      "audio_direction",
+      "negative_constraints"
+    ],
+    "output_fixture": "compatibility/fixtures/lm-studio-windows-2026-08-13-output.txt"
+  },
+  "privacy": {
+    "synthetic_prompt_only": true,
+    "history_record_created": false,
+    "images_or_private_media_used": false,
+    "credentials_published": false,
+    "model_artifact_published": false
+  },
+  "limitations": [
+    "This report validates one text-only local-server path, not image input.",
+    "The tested model artifact is not part of the project and its output quality is not benchmarked.",
+    "Remote endpoints and authenticated servers were not tested."
+  ]
+}
