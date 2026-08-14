@@ -5,6 +5,10 @@ stable public API is declared.
 
 ## [Unreleased]
 
+### Added
+
+- Original repository banner and social-preview branding.
+
 ## [0.1.0] - 2026-08-13
 
 ### Added
