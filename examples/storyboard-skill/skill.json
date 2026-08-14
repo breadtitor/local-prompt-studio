@@ -1,0 +1,8 @@
+{
+  "name": "Storyboard Prompt Writer",
+  "entrypoint": "SKILL.md",
+  "include": [
+    "references/format.md"
+  ],
+  "contract": "contract.json"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Generic storyboard prompt v1",
+  "required_sections": [
+    "creative_summary",
+    "visual_direction",
+    "audio_direction",
+    "negative_constraints"
+  ],
+  "min_output_chars": 180,
+  "reference_pattern": "@image_(\\d+)",
+  "reference_index_base": 0,
+  "require_all_attachments_referenced": true
+}

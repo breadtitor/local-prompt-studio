@@ -1,0 +1,28 @@
+name: Feature request
+description: Propose a focused improvement to the model-neutral core.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What cannot be accomplished reliably today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Trust boundary
+      options:
+        - label: This proposal does not require executing code from a Skill package.

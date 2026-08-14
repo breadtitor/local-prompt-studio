@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Prompt Skill"
+  short_description: "Build model-specific Local Prompt Studio Skills"
+  default_prompt: "Use $create-prompt-skill to build a Local Prompt Studio Skill for this model documentation."

@@ -1,0 +1,4 @@
+creative_summary: A quiet ten-second visual study of rain turning an empty bus-stop window into a moving abstract painting.
+visual_direction: Begin with a locked medium-wide view, then make a slow push toward the glass. Use cool evening light, shallow depth of field, natural reflections, and restrained motion. End on one raindrop joining another before both slide out of frame.
+audio_direction: Soft rainfall, a distant passing car, and a subtle shelter hum. No music or dialogue.
+negative_constraints: No logos, captions, visible faces, abrupt camera movement, impossible reflections, or exaggerated weather effects.
