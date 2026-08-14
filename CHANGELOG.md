@@ -5,6 +5,8 @@ stable public API is declared.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-13
+
 ### Added
 
 - Model-neutral Skill packages with optional references and output contracts.
