@@ -8,20 +8,51 @@ from typing import Any
 
 from .models import ContractReport, ValidationIssue
 
-SECTION_PATTERN = re.compile(r"(?m)^\s*([A-Za-z][A-Za-z0-9 _-]{0,80})\s*:\s*")
+SUPPORTED_FORMAT_VERSION = 1
+MAX_FORBIDDEN_SUBSTRINGS = 32
+MAX_PATTERN_CHARS = 256
+SECTION_PATTERN = re.compile(
+    r"(?m)^(?:\s*#{1,6}\s+([A-Za-z][A-Za-z0-9 _-]{0,80}?)\s*#*\s*$|"
+    r"\s*([A-Za-z][A-Za-z0-9 _-]{0,80})\s*:\s*)"
+)
+
+
+def _format_version(value: dict[str, Any]) -> int:
+    version = value.get("format_version", SUPPORTED_FORMAT_VERSION)
+    if isinstance(version, bool) or not isinstance(version, int):
+        raise ValueError("format_version must be an integer")
+    if version != SUPPORTED_FORMAT_VERSION:
+        raise ValueError(
+            f"Unsupported contract format_version {version}; "
+            f"supported version is {SUPPORTED_FORMAT_VERSION}"
+        )
+    return version
+
+
+def _compile_pattern(pattern: str, field: str) -> re.Pattern[str]:
+    if len(pattern) > MAX_PATTERN_CHARS:
+        raise ValueError(f"{field} must be at most {MAX_PATTERN_CHARS} characters")
+    try:
+        return re.compile(pattern)
+    except re.error as error:
+        raise ValueError(f"{field} is not a valid regular expression: {error}") from error
 
 
 @dataclass(frozen=True)
 class PromptContract:
     name: str
+    format_version: int = SUPPORTED_FORMAT_VERSION
     required_sections: tuple[str, ...] = ()
     min_output_chars: int = 1
+    max_output_chars: int | None = None
+    forbidden_substrings: tuple[str, ...] = ()
     reference_pattern: str | None = None
     reference_index_base: int = 0
     require_all_attachments_referenced: bool = False
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> PromptContract:
+        format_version = _format_version(value)
         name = str(value.get("name", "Unnamed contract")).strip() or "Unnamed contract"
         sections_value = value.get("required_sections", [])
         if not isinstance(sections_value, list) or not all(
@@ -31,10 +62,29 @@ class PromptContract:
         min_chars = int(value.get("min_output_chars", 1))
         if min_chars < 1:
             raise ValueError("min_output_chars must be positive")
+        max_chars_value = value.get("max_output_chars")
+        max_chars = int(max_chars_value) if max_chars_value is not None else None
+        if max_chars is not None and max_chars < min_chars:
+            raise ValueError("max_output_chars must be greater than or equal to min_output_chars")
+        forbidden_value = value.get("forbidden_substrings", [])
+        if not isinstance(forbidden_value, list) or not all(
+            isinstance(item, str) and item.strip() for item in forbidden_value
+        ):
+            raise ValueError("forbidden_substrings must be an array of non-empty strings")
+        if len(forbidden_value) > MAX_FORBIDDEN_SUBSTRINGS:
+            raise ValueError(
+                f"forbidden_substrings must contain at most {MAX_FORBIDDEN_SUBSTRINGS} entries"
+            )
+        forbidden_substrings = tuple(item.strip() for item in forbidden_value)
+        for index, substring in enumerate(forbidden_substrings):
+            if len(substring) > MAX_PATTERN_CHARS:
+                raise ValueError(
+                    f"forbidden_substrings[{index}] must be at most {MAX_PATTERN_CHARS} characters"
+                )
         reference_pattern = value.get("reference_pattern")
         if reference_pattern is not None:
             reference_pattern = str(reference_pattern)
-            compiled = re.compile(reference_pattern)
+            compiled = _compile_pattern(reference_pattern, "reference_pattern")
             if compiled.groups < 1:
                 raise ValueError("reference_pattern must contain a capture group for the index")
         index_base = int(value.get("reference_index_base", 0))
@@ -42,8 +92,11 @@ class PromptContract:
             raise ValueError("reference_index_base must be 0 or 1")
         return cls(
             name=name,
+            format_version=format_version,
             required_sections=tuple(item.strip() for item in sections_value),
             min_output_chars=min_chars,
+            max_output_chars=max_chars,
+            forbidden_substrings=forbidden_substrings,
             reference_pattern=reference_pattern,
             reference_index_base=index_base,
             require_all_attachments_referenced=bool(
@@ -66,7 +119,9 @@ def validate_output(
 ) -> ContractReport:
     issues: list[ValidationIssue] = []
     normalized_text = text.strip()
-    discovered = tuple(match.group(1).strip() for match in SECTION_PATTERN.finditer(text))
+    discovered = tuple(
+        (match.group(1) or match.group(2)).strip() for match in SECTION_PATTERN.finditer(text)
+    )
     discovered_lower = tuple(section.casefold() for section in discovered)
 
     if len(normalized_text) < contract.min_output_chars:
@@ -77,6 +132,27 @@ def validate_output(
                 f"{contract.min_output_chars}.",
             )
         )
+
+    if contract.max_output_chars is not None and len(normalized_text) > contract.max_output_chars:
+        issues.append(
+            ValidationIssue(
+                "OUTPUT_TOO_LONG",
+                f"Output has {len(normalized_text)} characters; contract allows at most "
+                f"{contract.max_output_chars}.",
+            )
+        )
+
+    matched_forbidden_substrings: list[int] = []
+    casefolded_text = text.casefold()
+    for index, substring in enumerate(contract.forbidden_substrings):
+        if substring.casefold() in casefolded_text:
+            matched_forbidden_substrings.append(index)
+            issues.append(
+                ValidationIssue(
+                    "FORBIDDEN_SUBSTRING",
+                    f"Output contains forbidden_substrings[{index}].",
+                )
+            )
 
     positions: list[int] = []
     for required in contract.required_sections:
@@ -138,5 +214,6 @@ def validate_output(
             "characters": len(normalized_text),
             "attachment_count": attachment_count,
             "referenced_indices": sorted(referenced_indices),
+            "matched_forbidden_substrings": matched_forbidden_substrings,
         },
     )

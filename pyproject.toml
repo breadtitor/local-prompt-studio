@@ -27,6 +27,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = [
+  "jsonschema>=4.25.0",
   "ruff>=0.12.0",
 ]
 

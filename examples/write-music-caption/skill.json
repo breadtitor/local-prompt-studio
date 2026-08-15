@@ -1,0 +1,14 @@
+{
+  "format_version": 1,
+  "name": "Structured Music Caption Writer",
+  "entrypoint": "SKILL.md",
+  "include": [
+    "references/format.md"
+  ],
+  "contract": "contract.json",
+  "provenance": {
+    "license": "MIT",
+    "source": "Independently authored Local Prompt Studio synthetic example",
+    "notes": "Contains no vendor caption templates, lyrics, track metadata, or copied model documentation."
+  }
+}

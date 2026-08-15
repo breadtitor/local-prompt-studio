@@ -54,6 +54,39 @@ class SkillPackageTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "safely relative"):
                 load_skill_package(archive_path)
 
+    def test_versioned_manifest_exposes_provenance(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            skill = self._skill_directory(Path(directory))
+            (skill / "skill.json").write_text(
+                json.dumps(
+                    {
+                        "format_version": 1,
+                        "name": "Versioned Skill",
+                        "entrypoint": "SKILL.md",
+                        "include": ["references/format.md"],
+                        "contract": "contract.json",
+                        "provenance": {
+                            "license": "MIT",
+                            "source": "Independently authored test fixture",
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            package = load_skill_package(skill)
+            self.assertEqual(package.format_version, 1)
+            self.assertEqual(package.provenance["license"], "MIT")  # type: ignore[index]
+
+    def test_unsupported_manifest_version_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            skill = self._skill_directory(Path(directory))
+            (skill / "skill.json").write_text(
+                json.dumps({"format_version": 2, "entrypoint": "SKILL.md"}),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "Unsupported skill.json format_version"):
+                load_skill_package(skill)
+
 
 if __name__ == "__main__":
     unittest.main()

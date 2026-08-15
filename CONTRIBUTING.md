@@ -14,7 +14,8 @@ to maintain.
 ## Skill contributions
 
 Only contribute Skill material you wrote yourself or may legally redistribute. Include its
-license and provenance in the pull request. Do not copy a vendor's documentation into this
+license and provenance in `skill.json` and the pull request. Validate new manifests against the
+published v1 JSON Schemas. Do not copy a vendor's documentation into this
 MIT-licensed repository merely because it is publicly readable. Prefer compact examples that
 teach the format without endorsing one provider.
 

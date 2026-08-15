@@ -17,8 +17,8 @@ short; public issues and pull requests remain the source of truth for individual
 ## Releases
 
 1. Start from a clean, up-to-date `main` after the required `quality` check passes.
-2. Run `ruff check .`, `python -m unittest discover -s tests -v`, both bundled Skill inspections,
-   the example contract validation, and a wheel build.
+2. Run `ruff check .`, `python -m unittest discover -s tests -v`, every bundled Skill inspection,
+   each example contract validation, and a wheel build.
 3. Update `CHANGELOG.md`, the version in `pyproject.toml`, and compatibility notes when relevant.
 4. Create an annotated semantic-version tag and GitHub release with limitations and verification
    results. Attach the wheel and its SHA-256 checksum.

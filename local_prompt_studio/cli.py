@@ -79,6 +79,8 @@ def _skill_summary(package: SkillPackage) -> dict[str, object]:
     return {
         "name": package.name,
         "source": package.source,
+        "format_version": package.format_version,
+        "provenance": package.provenance,
         "included_files": list(package.included_files),
         "prompt_characters": len(package.prompt_text),
         "contract": package.contract.name if package.contract else None,

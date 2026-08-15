@@ -207,13 +207,21 @@ class PromptStudioApp:
         details = [
             f"Name: {self.skill.name}",
             f"Source: {self.skill.source}",
+            f"Format version: {self.skill.format_version}",
             f"Text characters: {len(self.skill.prompt_text)}",
             f"Contract: {self.skill.contract.name if self.skill.contract else 'none'}",
-            "Files:",
-            *[f"  - {name}" for name in self.skill.included_files],
-            "",
-            "Scripts executed: no",
         ]
+        if self.skill.provenance:
+            provenance_lines = [f"  {key}: {value}" for key, value in self.skill.provenance.items()]
+            details.extend(["Provenance:", *provenance_lines])
+        details.extend(
+            [
+                "Files:",
+                *[f"  - {name}" for name in self.skill.included_files],
+                "",
+                "Scripts executed: no",
+            ]
+        )
         messagebox.showinfo("Skill inspection", "\n".join(details))
 
     def _add_images(self) -> None:

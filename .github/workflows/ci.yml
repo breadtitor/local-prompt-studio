@@ -32,6 +32,10 @@ jobs:
         run: local-prompt-studio --skill examples/storyboard-skill --inspect-skill
       - name: Validate example output
         run: local-prompt-studio --skill examples/storyboard-skill --validate-only examples/expected-output.txt
+      - name: Inspect structured music Skill
+        run: local-prompt-studio --skill examples/write-music-caption --inspect-skill
+      - name: Validate structured music output
+        run: local-prompt-studio --skill examples/write-music-caption --validate-only examples/music-caption-expected-output.txt
       - name: Validate recorded compatibility output
         run: local-prompt-studio --skill examples/storyboard-skill --validate-only compatibility/fixtures/lm-studio-windows-2026-08-13-output.txt
 

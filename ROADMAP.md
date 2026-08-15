@@ -14,11 +14,11 @@ response to real issue reports.
 
 ## 0.2 — community Skills
 
-- [ ] Define a versioned Skill manifest schema
-- [ ] Add JSON Schema validation and clearer diagnostics
+- [x] Define version 1 Skill manifest and output-contract JSON Schemas
+- [x] Validate version, provenance, length guards, and bounded pattern inputs with clear diagnostics
 - [x] Add a Codex authoring Skill that produces a reviewable starter package
 - [ ] Add a conformance test command for community Skill maintainers
-- [ ] Document licensing and provenance metadata for shared Skills
+- [x] Document licensing and provenance metadata for shared Skills
 
 ## Later, only with evidence
 
