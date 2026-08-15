@@ -11,6 +11,8 @@ stable public API is declared.
 - Version 1 JSON Schemas and inspectable license/source provenance for shared Skills.
 - Markdown section headings, maximum output length, and bounded forbidden-substring validation.
 - An independently authored structured music-caption Skill with a synthetic instrumental fixture.
+- Illustrated English and Simplified Chinese user guides for GUI, CLI, LM Studio, validation, and
+  private-history workflows.
 
 ## [0.1.0] - 2026-08-13
 

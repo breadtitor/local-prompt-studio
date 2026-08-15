@@ -2,7 +2,8 @@
 
 ![Local Prompt Studio：Skill 经过私有本地工作流生成并验证提示词](assets/social-preview-github.jpg)
 
-[English](README.md) · [Skill 格式](docs/SKILL_FORMAT.md) · [安全模型](docs/SECURITY_MODEL.md)
+[English](README.md) · [中文图文教程](docs/USER_GUIDE_zh-CN.md) ·
+[Skill 格式](docs/SKILL_FORMAT.md) · [安全模型](docs/SECURITY_MODEL.md)
 
 Local Prompt Studio 是一个隐私优先、模型无关的提示词 Skill 运行器。Skill 负责描述某个
 模型或工作流需要怎样写提示词；Studio 负责本地接口调用、图片引用、推理与正文分流、同一
