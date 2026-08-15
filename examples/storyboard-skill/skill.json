@@ -1,8 +1,14 @@
 {
+  "format_version": 1,
   "name": "Storyboard Prompt Writer",
   "entrypoint": "SKILL.md",
   "include": [
     "references/format.md"
   ],
-  "contract": "contract.json"
+  "contract": "contract.json",
+  "provenance": {
+    "license": "MIT",
+    "source": "Independently authored Local Prompt Studio example",
+    "notes": "Contains no vendor prompt guide or copied model documentation."
+  }
 }

@@ -1,0 +1,11 @@
+Create an instrumental retro-futurist electronic track for the late-night planning screen of a
+neon city management game. Keep it in 4/4 at a measured mid-tempo pace, with warm analog bass,
+glassy arpeggios, restrained drum-machine grooves, and occasional clean guitar harmonics.
+
+[Intro] Begin sparse and distant.
+[Development] Add motion without becoming busy.
+[Climax] Reach a confident but controlled peak.
+[Outro] Remove layers until only the pulse and one reflective motif remain.
+
+Hard constraints: no vocals, no choir, no festival drop, no harsh distortion, and no crushed
+mastering. Shape a roughly three-minute arc and do not invent a track title.

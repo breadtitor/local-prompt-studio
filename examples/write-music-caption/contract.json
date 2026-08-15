@@ -1,0 +1,18 @@
+{
+  "format_version": 1,
+  "name": "Structured music caption v1",
+  "required_sections": [
+    "Global Metadata",
+    "Vocal Details",
+    "Arrangement"
+  ],
+  "min_output_chars": 700,
+  "max_output_chars": 3500,
+  "forbidden_substrings": [
+    "```",
+    "template_id:",
+    "template id:",
+    "track_id:",
+    "track id:"
+  ]
+}

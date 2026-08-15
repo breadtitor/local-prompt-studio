@@ -33,10 +33,15 @@ An optional `skill.json` makes inclusion explicit:
 
 ```json
 {
+  "format_version": 1,
   "name": "Example Prompt Writer",
   "entrypoint": "SKILL.md",
   "include": ["references/output-format.md"],
-  "contract": "contract.json"
+  "contract": "contract.json",
+  "provenance": {
+    "license": "MIT",
+    "source": "Independently authored example"
+  }
 }
 ```
 
@@ -44,24 +49,36 @@ All paths are relative to the package. Absolute paths and parent traversal (`..`
 The manifest is an extension of Local Prompt Studio, not a claim of universal Skill-package
 compatibility.
 
+New shared packages should set `format_version` to `1` and include `provenance.license` plus
+`provenance.source`. The loader keeps accepting legacy manifests without an explicit version as
+version 1, but rejects unknown future versions instead of guessing. Machine-readable schemas are
+published at [`schemas/skill.schema.json`](../schemas/skill.schema.json) and
+[`schemas/contract.schema.json`](../schemas/contract.schema.json).
+
 ## Output contract
 
 `contract.json` adds deterministic checks after generation:
 
 ```json
 {
+  "format_version": 1,
   "name": "Example contract v1",
   "required_sections": ["summary", "prompt", "constraints"],
   "min_output_chars": 120,
+  "max_output_chars": 4000,
+  "forbidden_substrings": ["```"],
   "reference_pattern": "@image_(\\d+)",
   "reference_index_base": 0,
   "require_all_attachments_referenced": true
 }
 ```
 
-Section names are matched as case-insensitive headings followed by a colon. If
+Section names are matched as case-insensitive headings followed by a colon or as Markdown
+headings. If
 `required_sections` is supplied, their order is also checked. The reference regex must contain
-one capture group for the numeric attachment index.
+one capture group for the numeric attachment index. Regular expressions are bounded to 256
+characters. A contract may define at most 32 case-insensitive forbidden substrings; these remain
+literal text rather than regular expressions so an untrusted Skill cannot add a costly pattern.
 
 Contracts detect structural mistakes; they do not determine whether a prompt is artistically
 good, factually correct, safe, or accepted by a target model.

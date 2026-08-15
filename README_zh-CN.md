@@ -40,7 +40,7 @@ Prompt Studio 再独立检查其结构。
 - 对接 LM Studio 等兼容 OpenAI 接口的本地服务，支持文字和参考图。
 - 服务端支持时，将 reasoning 与最终正文分别显示。
 - 第一次 token 预算被推理耗尽时，在同一 assistant turn 内继续生成。
-- 校验必需段落、段落顺序、最小长度和图片引用编号。
+- 校验冒号或 Markdown 段落标题、段落顺序、长度上下限、禁止子串和图片引用编号。
 - 原子写入私有历史，只保存图片文件名，不复制原图。
 - 提供零运行时第三方依赖的 CLI 和 Tkinter 图形界面。
 
@@ -70,6 +70,10 @@ py -3 -m venv .venv
 
 最小 Skill 只需要一个 `SKILL.md`。可增加 `references/`、`skill.json` 和
 `contract.json`。完整规范见 [Skill 格式说明](docs/SKILL_FORMAT.md)。
+
+仓库提供两个完全独立编写的合成示例：[分镜提示词 Skill](examples/storyboard-skill/SKILL.md)
+和[结构化音乐 Caption Skill](examples/write-music-caption/SKILL.md)。音乐示例不包含厂商模板、
+歌词或复制的模型文档。
 
 ## 隐私与安全
 

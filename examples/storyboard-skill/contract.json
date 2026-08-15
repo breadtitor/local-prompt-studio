@@ -1,4 +1,5 @@
 {
+  "format_version": 1,
   "name": "Generic storyboard prompt v1",
   "required_sections": [
     "creative_summary",
@@ -7,6 +8,10 @@
     "negative_constraints"
   ],
   "min_output_chars": 180,
+  "max_output_chars": 4000,
+  "forbidden_substrings": [
+    "```"
+  ],
   "reference_pattern": "@image_(\\d+)",
   "reference_index_base": 0,
   "require_all_attachments_referenced": true

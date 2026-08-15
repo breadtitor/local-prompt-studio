@@ -47,7 +47,8 @@ package; Local Prompt Studio performs the independent structural checks.
 - Send text and image references to OpenAI-compatible local endpoints such as LM Studio.
 - Stream reasoning separately from the final answer when the server exposes it.
 - Continue the same assistant turn when reasoning consumes the first token budget.
-- Validate required section order, minimum length, and attachment references.
+- Validate colon or Markdown section order, bounded output length, forbidden substrings, and
+  attachment references.
 - Save atomic, private-by-default history records containing image basenames, not copied images.
 - Run through a dependency-free CLI or a Tkinter desktop UI.
 
@@ -100,7 +101,9 @@ my-model-skill/
 
 Read [the Skill format](docs/SKILL_FORMAT.md) before sharing a package. The included
 [storyboard example](examples/storyboard-skill/SKILL.md) is deliberately model-neutral and
-contains no third-party prompt documentation.
+contains no third-party prompt documentation. The independent
+[structured music example](examples/write-music-caption/SKILL.md) demonstrates an instrumental
+music-caption workflow without bundling vendor templates, lyrics, or model documentation.
 
 ## Privacy and trust boundary
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Structured Music Caption Writer"
+  short_description: "Write section-aware music captions"
+  default_prompt: "Use $write-music-caption to turn this music brief into a structured, section-aware caption."

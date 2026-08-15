@@ -13,6 +13,7 @@ ALLOWED_TEXT_SUFFIXES = {".md", ".txt", ".json", ".yaml", ".yml"}
 MAX_FILE_BYTES = 512 * 1024
 MAX_PACKAGE_BYTES = 2 * 1024 * 1024
 MAX_INCLUDED_FILES = 64
+SUPPORTED_FORMAT_VERSION = 1
 
 
 @dataclass(frozen=True)
@@ -21,6 +22,8 @@ class SkillPackage:
     source: str
     prompt_text: str
     included_files: tuple[str, ...]
+    format_version: int = SUPPORTED_FORMAT_VERSION
+    provenance: dict[str, str] | None = None
     contract: PromptContract | None = None
     warnings: tuple[str, ...] = ()
 
@@ -138,6 +141,38 @@ def _parse_manifest(reader: SkillReader) -> dict[str, Any]:
     return value
 
 
+def _manifest_format_version(manifest: dict[str, Any]) -> int:
+    version = manifest.get("format_version", SUPPORTED_FORMAT_VERSION)
+    if isinstance(version, bool) or not isinstance(version, int):
+        raise ValueError("skill.json format_version must be an integer")
+    if version != SUPPORTED_FORMAT_VERSION:
+        raise ValueError(
+            f"Unsupported skill.json format_version {version}; "
+            f"supported version is {SUPPORTED_FORMAT_VERSION}"
+        )
+    return version
+
+
+def _manifest_provenance(manifest: dict[str, Any]) -> dict[str, str] | None:
+    value = manifest.get("provenance")
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError("skill.json provenance must be an object")
+    allowed = {"license", "source", "notes"}
+    unknown = sorted(set(value) - allowed)
+    if unknown:
+        raise ValueError(f"skill.json provenance contains unknown fields: {', '.join(unknown)}")
+    normalized: dict[str, str] = {}
+    for field_name, field_value in value.items():
+        if not isinstance(field_value, str) or not field_value.strip():
+            raise ValueError(f"skill.json provenance.{field_name} must be a non-empty string")
+        normalized[field_name] = field_value.strip()
+    if "license" not in normalized or "source" not in normalized:
+        raise ValueError("skill.json provenance requires license and source")
+    return normalized
+
+
 def _frontmatter_name(skill_text: str) -> str | None:
     if not skill_text.startswith("---"):
         return None
@@ -150,6 +185,8 @@ def _frontmatter_name(skill_text: str) -> str | None:
 
 def _load_from_reader(reader: SkillReader, source: str) -> SkillPackage:
     manifest = _parse_manifest(reader)
+    format_version = _manifest_format_version(manifest)
+    provenance = _manifest_provenance(manifest)
     entrypoint = _safe_relative_path(str(manifest.get("entrypoint", "SKILL.md")))
     skill_text = reader.read_text(entrypoint).strip()
     if not skill_text:
@@ -202,6 +239,8 @@ def _load_from_reader(reader: SkillReader, source: str) -> SkillPackage:
         source=source,
         prompt_text="\n\n".join(chunks),
         included_files=(entrypoint, *included),
+        format_version=format_version,
+        provenance=provenance,
         contract=contract,
         warnings=tuple(warnings),
     )
