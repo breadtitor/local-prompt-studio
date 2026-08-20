@@ -69,7 +69,28 @@ published at [`schemas/skill.schema.json`](../schemas/skill.schema.json) and
   "forbidden_substrings": ["```"],
   "reference_pattern": "@image_(\\d+)",
   "reference_index_base": 0,
-  "require_all_attachments_referenced": true
+  "require_all_attachments_referenced": true,
+  "tag_lists": {
+    "ascii_only": true,
+    "reject_duplicates": true,
+    "reject_cross_section_duplicates": true,
+    "sections": [
+      {
+        "section": "Positive Prompt",
+        "min_tags": 12,
+        "max_tags": 90,
+        "required_tags": ["masterpiece", "best quality"]
+      },
+      {
+        "section": "Negative Prompt",
+        "min_tags": 4,
+        "minimum_required_tag_matches": {
+          "tags": ["lowres", "bad anatomy", "watermark"],
+          "count": 2
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -79,6 +100,19 @@ headings. If
 one capture group for the numeric attachment index. Regular expressions are bounded to 256
 characters. A contract may define at most 32 case-insensitive forbidden substrings; these remain
 literal text rather than regular expressions so an untrusted Skill cannot add a costly pattern.
+
+### Tag-list checks
+
+`tag_lists` is optional and is intended for comma-delimited tag dialects. Every configured
+`section` must also be in `required_sections`, so heading existence and order remain explicit.
+For each listed section, the runner can check tag count bounds, literal required tags, or that a
+minimum number of tags comes from a configured baseline. It can additionally reject non-ASCII
+tags, duplicates within a list, and normalized duplicates between lists. For duplicate checks,
+underscores and spaces are equivalent and a simple numeric weight suffix is ignored.
+
+This remains an output-shape check. It does not verify whether a tag is supported by a checkpoint,
+whether a target workflow is installed, or whether the result is artistically good or safe.
+`tag_lists` has no user-supplied regular expressions, scripts, or network actions.
 
 Contracts detect structural mistakes; they do not determine whether a prompt is artistically
 good, factually correct, safe, or accepted by a target model.

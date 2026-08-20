@@ -47,15 +47,31 @@ Available keys are:
   "name": "Contract name and version",
   "required_sections": ["section_one", "section_two"],
   "min_output_chars": 120,
+  "max_output_chars": 2400,
+  "forbidden_substrings": ["```"],
   "reference_pattern": "@image_(\\d+)",
   "reference_index_base": 0,
-  "require_all_attachments_referenced": false
+  "require_all_attachments_referenced": false,
+  "tag_lists": {
+    "ascii_only": true,
+    "reject_duplicates": true,
+    "reject_cross_section_duplicates": true,
+    "sections": [
+      {"section": "Positive Prompt", "min_tags": 12, "max_tags": 90},
+      {"section": "Negative Prompt", "min_tags": 4}
+    ]
+  }
 }
 ```
 
 Section headings are case-insensitive and end with a colon. Required section order is enforced.
 The reference regex needs one capture group containing the numeric index. Omit constraints that
 cannot be checked deterministically.
+
+For comma-delimited tag dialects, `tag_lists` can validate ASCII, normalized duplicates, tag
+counts, literal required tags, and a minimum number of tags from a fixed baseline. Its configured
+sections must also appear in `required_sections`. Do not add a free-form regex to express
+model-specific semantics; contracts intentionally support only bounded declarative checks.
 
 ## provenance.json
 

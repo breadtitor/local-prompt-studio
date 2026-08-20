@@ -19,6 +19,8 @@ response to real issue reports.
 - [x] Add a Codex authoring Skill that produces a reviewable starter package
 - [ ] Add a conformance test command for community Skill maintainers
 - [x] Document licensing and provenance metadata for shared Skills
+- [x] Add a bounded, data-only tag-list contract and an independently authored illustration-tag
+  example without model assets or vendor guides
 
 ## Later, only with evidence
 

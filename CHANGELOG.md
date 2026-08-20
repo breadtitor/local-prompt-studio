@@ -13,6 +13,10 @@ stable public API is declared.
 - An independently authored structured music-caption Skill with a synthetic instrumental fixture.
 - Illustrated English and Simplified Chinese user guides for GUI, CLI, LM Studio, validation, and
   private-history workflows.
+- An independently authored illustration-tag Skill with synthetic fixtures and no bundled
+  checkpoint, workflow, character, or vendor-guide material.
+- Bounded declarative tag-list contracts for ASCII, normalized duplicates, tag counts, required
+  tags, baseline matches, and cross-section conflicts.
 
 ## [0.1.0] - 2026-08-13
 

@@ -49,7 +49,8 @@ package; Local Prompt Studio performs the independent structural checks.
 - Stream reasoning separately from the final answer when the server exposes it.
 - Continue the same assistant turn when reasoning consumes the first token budget.
 - Validate colon or Markdown section order, bounded output length, forbidden substrings, and
-  attachment references.
+  attachment references; tag-list contracts can also enforce ASCII, de-duplication, per-section
+  tag counts, required tags, and cross-section conflicts.
 - Save atomic, private-by-default history records containing image basenames, not copied images.
 - Run through a dependency-free CLI or a Tkinter desktop UI.
 
@@ -105,6 +106,9 @@ Read [the Skill format](docs/SKILL_FORMAT.md) before sharing a package. The incl
 contains no third-party prompt documentation. The independent
 [structured music example](examples/write-music-caption/SKILL.md) demonstrates an instrumental
 music-caption workflow without bundling vendor templates, lyrics, or model documentation.
+The [illustration-tag example](examples/write-illustration-tags/SKILL.md) demonstrates separate,
+paste-ready positive and negative tag lists with a data-only tag contract; it does not ship a
+checkpoint, workflow JSON, character data, or vendor prompt guide.
 
 ## Privacy and trust boundary
 

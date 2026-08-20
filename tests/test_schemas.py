@@ -25,6 +25,7 @@ class SchemaTests(unittest.TestCase):
         for relative_path in (
             "examples/storyboard-skill/skill.json",
             "examples/write-music-caption/skill.json",
+            "examples/write-illustration-tags/skill.json",
         ):
             instance = json.loads((self.root / relative_path).read_text(encoding="utf-8"))
             validator.validate(instance)
@@ -34,6 +35,7 @@ class SchemaTests(unittest.TestCase):
         for relative_path in (
             "examples/storyboard-skill/contract.json",
             "examples/write-music-caption/contract.json",
+            "examples/write-illustration-tags/contract.json",
         ):
             instance = json.loads((self.root / relative_path).read_text(encoding="utf-8"))
             validator.validate(instance)
@@ -45,6 +47,16 @@ class SchemaTests(unittest.TestCase):
             "entrypoint": "SKILL.md",
         }
         errors = list(Draft202012Validator(self.skill_schema).iter_errors(instance))
+        self.assertTrue(errors)
+
+    def test_invalid_tag_list_schema_is_rejected(self) -> None:
+        instance = {
+            "format_version": 1,
+            "name": "Invalid tag list",
+            "required_sections": ["Positive Prompt"],
+            "tag_lists": {"sections": [{"section": "Positive Prompt", "min_tags": 0}]},
+        }
+        errors = list(Draft202012Validator(self.contract_schema).iter_errors(instance))
         self.assertTrue(errors)
 
 
