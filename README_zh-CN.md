@@ -42,6 +42,7 @@ Prompt Studio 再独立检查其结构。
 - 服务端支持时，将 reasoning 与最终正文分别显示。
 - 第一次 token 预算被推理耗尽时，在同一 assistant turn 内继续生成。
 - 校验冒号或 Markdown 段落标题、段落顺序、长度上下限、禁止子串和图片引用编号。
+- 标签列表契约还可校验 ASCII、去重、每段标签数量、必需标签和正负列表间的冲突。
 - 原子写入私有历史，只保存图片文件名，不复制原图。
 - 提供零运行时第三方依赖的 CLI 和 Tkinter 图形界面。
 
@@ -75,6 +76,8 @@ py -3 -m venv .venv
 仓库提供两个完全独立编写的合成示例：[分镜提示词 Skill](examples/storyboard-skill/SKILL.md)
 和[结构化音乐 Caption Skill](examples/write-music-caption/SKILL.md)。音乐示例不包含厂商模板、
 歌词或复制的模型文档。
+新增的[插画正负标签 Skill](examples/write-illustration-tags/SKILL.md)演示可分别粘贴的正向、负向
+英文标签及其数据式契约；其中不包含 checkpoint、工作流 JSON、角色资料或厂商提示词指南。
 
 ## 隐私与安全
 

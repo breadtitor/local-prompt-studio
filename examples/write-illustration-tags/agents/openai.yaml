@@ -1,0 +1,4 @@
+interface:
+  display_name: "Illustration Tag Prompt Writer"
+  short_description: "Write paste-ready positive and negative illustration tags"
+  default_prompt: "Use $write-illustration-tags to turn this image idea into positive and negative tag lists."

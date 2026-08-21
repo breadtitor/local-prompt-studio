@@ -1,0 +1,7 @@
+### Positive Prompt
+
+masterpiece, best quality, absurdres, highres, 1woman, blue eyes, 蓝色眼睛, blue_eyes
+
+### Negative Prompt
+
+lowres, blue eyes

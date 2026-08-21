@@ -1,0 +1,7 @@
+### Positive Prompt
+
+masterpiece, best quality, absurdres, highres, 1woman, solo, adult, long black hair, blue eyes, white raincoat, clear umbrella, looking at viewer, turning back, full body, rainy neon street, night, wet pavement, reflections, cinematic backlighting, atmospheric, detailed fabric
+
+### Negative Prompt
+
+worst quality, low quality, lowres, bad anatomy, bad hands, extra digits, fewer digits, missing fingers, extra limbs, text, watermark, signature, username, jpeg artifacts, blurry, unfinished, cropped head, group

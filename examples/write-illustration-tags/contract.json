@@ -1,0 +1,57 @@
+{
+  "format_version": 1,
+  "name": "Illustration tag pair v1",
+  "required_sections": [
+    "Positive Prompt",
+    "Negative Prompt"
+  ],
+  "min_output_chars": 100,
+  "max_output_chars": 2600,
+  "forbidden_substrings": [
+    "```"
+  ],
+  "tag_lists": {
+    "ascii_only": true,
+    "reject_duplicates": true,
+    "reject_cross_section_duplicates": true,
+    "sections": [
+      {
+        "section": "Positive Prompt",
+        "min_tags": 12,
+        "max_tags": 90,
+        "required_tags": [
+          "masterpiece",
+          "best quality",
+          "absurdres",
+          "highres"
+        ]
+      },
+      {
+        "section": "Negative Prompt",
+        "min_tags": 4,
+        "max_tags": 50,
+        "minimum_required_tag_matches": {
+          "tags": [
+            "worst quality",
+            "low quality",
+            "lowres",
+            "bad anatomy",
+            "bad hands",
+            "extra digits",
+            "fewer digits",
+            "missing fingers",
+            "extra limbs",
+            "text",
+            "watermark",
+            "signature",
+            "username",
+            "jpeg artifacts",
+            "blurry",
+            "unfinished"
+          ],
+          "count": 4
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "format_version": 1,
+  "name": "Illustration Tag Prompt Writer",
+  "entrypoint": "SKILL.md",
+  "include": [
+    "references/tag-format.md"
+  ],
+  "contract": "contract.json",
+  "provenance": {
+    "license": "MIT",
+    "source": "Independently authored Local Prompt Studio synthetic example",
+    "notes": "Contains no model weights, vendor workflows, vendor prompt guides, character data, or copied model documentation."
+  }
+}

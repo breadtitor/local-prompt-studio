@@ -51,6 +51,82 @@
     },
     "require_all_attachments_referenced": {
       "type": "boolean"
+    },
+    "tag_lists": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sections"],
+      "properties": {
+        "ascii_only": {
+          "type": "boolean"
+        },
+        "reject_duplicates": {
+          "type": "boolean"
+        },
+        "reject_cross_section_duplicates": {
+          "type": "boolean"
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["section"],
+            "properties": {
+              "section": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 81
+              },
+              "min_tags": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 200
+              },
+              "max_tags": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 200
+              },
+              "required_tags": {
+                "type": "array",
+                "maxItems": 32,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              },
+              "minimum_required_tag_matches": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["tags", "count"],
+                "properties": {
+                  "tags": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 32,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 80
+                    }
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 32
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
